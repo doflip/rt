@@ -136,7 +136,7 @@ sub AddRecord {
     my $self = shift;
     my ($record) = @_;
 
-    return unless $record->CurrentUserCanSee;
+    return unless $self->CurrentUser->PrincipalObj->Id == RT->SystemUser->Id || $record->CurrentUserCanSee;
     return $self->SUPER::AddRecord($record);
 }
 
